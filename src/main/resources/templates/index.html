@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css.all.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title>FINDME : HOME</title>
+</head>
+<body onload="getLocation()">
+<input type="text" value="" id="myInput2">
+<div class="area" >
+	<ul class="circles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div >
+<h1 style="font-size:28px;color:white"align="center">FIND ME</h1><br><br>
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form action="#"  th:action="@{/process_register}" onsubmit="clipboard()" id="register-form" th:object="${user}" method="post" >
+			<h1>Register</h1><br>
+			<input type="tel"  th:field="*{phone}" name="email" id="phone" value="" title="Please Enter Your Phone Number" placeholder="Phone Number" autocomplete="off" minlength="10" maxlength="10" pattern="[0-9]{10}" required/>
+			<input type="hidden" value="https://www.google.com/maps/dir/?api=1&destination=" id="myInput">
+			<input type="hidden" th:field="*{location}" id="location" value="">
+			<input type="text" th:field="*{title}" id="title"  placeholder="Title for Location" title="Please Enter Your Customized Title for Location" value="" autocomplete="off" minlength="4" maxlength="25" required>
+			<input type="text" th:field="*{saltKey}" id="saltKey" name="pass" value="" title="Please Remember this Password to Access!!" placeholder=" Your Password" minlength="3" maxlength="3" readonly="readonly" required /><br>
+			<button>SAVE</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<button  id="sign-in-button" class ="sign-in-button" onclick="share_location()">&nbsp;SHARE&nbsp;<i style="font-size:14px" class="fa">&#xf1e0;</i></button>
+		<form action="#" th:action="@{/get_location}" id="sign-in" th:object="${user}" method="post">
+			<h1>Sign in</h1><br>
+			<input type="number"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" th:name="savedPhone"  name="phone" id="savedPhone" value="" title="Please Enter Your Phone Number" placeholder="Phone Number" autocomplete="off" minlength="10" maxlength="10"  pattern="[1-9]{1}[0-9]{9}" required/>
+			<input type="text" th:name="savedPassword"  id="savedPass" name="pass" value="" title="Please Enter Your Saved Password to Access!!" placeholder="Saved Password" minlength="3" maxlength="3"  required />
+			<button type="submit" id="go-button" class="go-button">GO</button><br>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h2>Welcome Back!</h2>
+				<p>Please Register with your Phone Number and make note of <b>Auto-Generated Password</b></p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h2>Hello, Friend!</h2>
+				<p>Enter your personal details and start journey with us</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/geolocation.js"></script>
+</html>

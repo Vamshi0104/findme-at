@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetching Your Location</title>
+</head>
+<body onload="func()">
+<br><br><br><br><br><br><br><br>
+<h1 style="font-size:28px;color:black;font-family:cursive;"align="center">Fetching Your Location  &#128516;</h1><br><br>
+<h2 style="font-size:28px;color:black;font-family:cursive;"align="center">Redirecting....... &#128512;</h2><br>
+  <form action="#"  th:action="@{/share_my_location}" th:object="${user}" id="my_form" method="post" >
+  <input type="hidden" th:name="savedPhone" id="savedPhone" value="" />
+  <input type="hidden" th:name="savedPassword" id="savedPass" value="" />
+  <input type="submit" id="my_submit">
+  </form>
+</body>
+<script type='text/javascript' src='https://code.jquery.com/jquery.min.js'></script>
+<script>
+  function func(){
+  $('#my_submit').hide();
+  document.getElementById("savedPhone").value=localStorage.getItem("secure_phone");
+  document.getElementById("savedPass").value=localStorage.getItem("secure_pass");
+  document.createElement('form').submit.call(document.getElementById('my_form'));
+  localStorage.clear();
+  }
+</script>
+</html>
